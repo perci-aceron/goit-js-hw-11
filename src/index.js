@@ -76,12 +76,14 @@ async function fetchImages(searchQuery) {
 
       renderImageCards(data.hits);
 
-      const { height: cardHeight } = document
-        .querySelector('.gallery')
-        .firstElementChild.getBoundingClientRect();
-      window.scrollBy({
-        top: cardHeight * 2,
-        behavior: 'smooth',
+      requestAnimationFrame(() => {
+        const { height: cardHeight } = document
+          .querySelector('.gallery')
+          .firstElementChild.getBoundingClientRect();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
       });
 
       lightbox.refresh();
@@ -119,8 +121,8 @@ function renderImageCards(images) {
     imageLink.appendChild(img);
     photoCard.appendChild(imageLink);
     photoCard.appendChild(info);
-
     gallery.appendChild(photoCard);
   });
 }
+
 document.querySelector('.load-more').style.display = 'none';
