@@ -76,16 +76,14 @@ async function fetchImages(searchQuery) {
 
       renderImageCards(data.hits);
 
-      const gallery = document.querySelector('.gallery');
-      const { height: cardHeight } =
-        gallery.firstElementChild.getBoundingClientRect();
-      const { scrollTop } = document.documentElement;
-
-      gallery.style.transform = `translateY(${scrollTop}px)`;
-      gallery.scrollTop = 0;
-
       requestAnimationFrame(() => {
-        gallery.style.transform = '';
+        const { height: cardHeight } = document
+          .querySelector('.gallery')
+          .firstElementChild.getBoundingClientRect();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
       });
 
       lightbox.refresh();
